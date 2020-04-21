@@ -43,27 +43,22 @@
                     <th>Zdjęcie</th>
                 </tr>
                 <tr th:each = "employee,iterStat : ${employees}" th:classappend="${employee.dateOfTermination!=null} ? 'fired'">
-                    <p>
-                    <!-- pozycja na liście -->
-                    <td>
-                        <p th:text = "${iterStat.count}">pozycja</p>
-                    </td>
+                    
+                        <!-- pozycja na liście -->
+                    <td th:text = "${iterStat.count}">pozycja</td>
+                    
                     <!-- wypisanie 2 el w jednej lini -->
-                    <td>
-                        <p th:text = "|${employee.firstName} ${employee.lastName}|">imie nazwisko</p>
-                    </td>
+                    <td th:text = "|${employee.firstName} ${employee.lastName}|">imie nazwisko</td>
+                    
                     <!-- stanowisko -->
-                    <td>
-                        <p th:text = "${employee.jobTitle}">stanowisko</p>
-                    </td>
+                    <td th:text = "${employee.jobTitle}">stanowisko</td>
+                    
                     <!-- formatowanie wypłaty -->
-                    <td>
-                        <p th:text="${#numbers.formatDecimal(employee.salary, 0, 'WHITESPACE', 2, 'POINT')}">salary</p>
-                    </td>
+                    <td th:text="${#numbers.formatDecimal(employee.salary, 0, 'WHITESPACE', 2, 'POINT')}">salary</td>
+                    
                     <!-- formatowanie daty -->
-                    <td>
-                        <p th:text = "${#calendars.format(employee.dateOfEmployment, 'dd.MM.yyyy')}">przyjęcie</p>
-                    </td>
+                    <td th:text = "${#calendars.format(employee.dateOfEmployment, 'dd.MM.yyyy')}">przyjęcie</td>
+                    
                     <!-- warunek gdy jest i gdy nie ma wartości -->
                     <td>
                         <p th:if = "${employee.dateOfTermination==null}"> Wciąż pracuje </p>
@@ -73,27 +68,22 @@
                     <!-- wypisanie w kolumnie listy wartości -->
                     <td>
                         <p th:each = "skill,iterStat : ${employee.skills}">
-                            <p> 
-                                <span th:if = "${iterStat.last==false}" 
-                                      th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</span>
-                                <span th:if = "${iterStat.last==true}"
-                                      th:text = "|${skill.name} (${skill.level})|"> Umiejętność (level)</span>
-                            </p>
+                            <span th:if = "${iterStat.last==false}" 
+                                  th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</span>
+                            <span th:if = "${iterStat.last==true}"
+                                  th:text = "|${skill.name} (${skill.level})|"> Umiejętność (level)</span>
                         </p>
                     </td>
                     <!-- wypisanie uwag -->
                     <td>
                         <p th:each = "comment : ${employee.comments}">
-                            <p>
-                                <span th:text = "${comment}"> Uwagi</span>
-                            </p>
+                            <span th:text = "${comment}"> Uwagi</span>
                         </p>
                     </td>
                     <!-- zdjęcie -->
                     <td>
                         <img th:src="${employee.photoUrl}" class="empPhoto" src="http://via.placeholder.com/250x250"/>
                     </td>
-                </p>
                 </tr>
             </table>
         </div>
