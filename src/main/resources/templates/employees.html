@@ -42,59 +42,38 @@
                     <th>Uwagi</th>
                     <th>Zdjęcie</th>
                 </tr>
-                <tr th:each = "employee,iterStat : ${employees}">
+                <tr th:each = "employee,iterStat : ${employees}" th:classappend="${employee.dateOfTermination!=null} ? 'fired'">
                     <p>
                     <!-- pozycja na liście -->
                     <td>
-                        <p  th:unless = "${employee.dateOfTermination==null}" th:class = "fired"
-                               th:text = "${iterStat.count}">pozycja</p>
-                        <p  th:if = "${employee.dateOfTermination==null}" 
-                               th:text = "${iterStat.count}">pozycja</p>
+                        <p th:text = "${iterStat.count}">pozycja</p>
                     </td>
                     <!-- wypisanie 2 el w jednej lini -->
                     <td>
-                        <p  th:unless = "${employee.dateOfTermination==null}" th:class = "fired" 
-                               th:text = "|${employee.firstName} ${employee.lastName}|">imie nazwisko</p>
-                        <p  th:if = "${employee.dateOfTermination==null}" 
-                               th:text = "|${employee.firstName} ${employee.lastName}|">imie nazwisko</p>
+                        <p th:text = "|${employee.firstName} ${employee.lastName}|">imie nazwisko</p>
                     </td>
                     <!-- stanowisko -->
                     <td>
-                        <p  th:unless = "${employee.dateOfTermination==null}"  th:class = "fired"
-                               th:text = "${employee.jobTitle}">stanowisko</p>
-                        <p  th:if = "${employee.dateOfTermination==null}" 
-                               th:text = "${employee.jobTitle}">stanowisko</p>
+                        <p th:text = "${employee.jobTitle}">stanowisko</p>
                     </td>
                     <!-- formatowanie wypłaty -->
                     <td>
-                        <p  th:unless = "${employee.dateOfTermination==null}" th:class = "fired"
-                               th:text="${#numbers.formatDecimal(employee.salary, 0, 'WHITESPACE', 2, 'POINT')}">salary</p>
-                        <p  th:if = "${employee.dateOfTermination==null}" 
-                               th:text="${#numbers.formatDecimal(employee.salary, 0, 'WHITESPACE', 2, 'POINT')}">salary</p>
+                        <p th:text="${#numbers.formatDecimal(employee.salary, 0, 'WHITESPACE', 2, 'POINT')}">salary</p>
                     </td>
                     <!-- formatowanie daty -->
                     <td>
-                        <p  th:unless = "${employee.dateOfTermination==null}" th:class = "fired"
-                               th:text = "${#calendars.format(employee.dateOfEmployment, 'dd.MM.yyyy')}">przyjecie</p>
-                        <p  th:if = "${employee.dateOfTermination==null}" 
-                               th:text = "${#calendars.format(employee.dateOfEmployment, 'dd.MM.yyyy')}">przyjęcie</p>
+                        <p th:text = "${#calendars.format(employee.dateOfEmployment, 'dd.MM.yyyy')}">przyjęcie</p>
                     </td>
                     <!-- warunek gdy jest i gdy nie ma wartości -->
                     <td>
                         <p th:if = "${employee.dateOfTermination==null}"> Wciąż pracuje </p>
-                        <p th:unless = "${employee.dateOfTermination==null}" th:class = "fired" 
-                              th:text = "${#calendars.format(employee.dateOfTermination, 'dd.MM.yyyy')}">zwolnienie</p>
+                        <p th:unless = "${employee.dateOfTermination==null}"
+                           th:text = "${#calendars.format(employee.dateOfTermination, 'dd.MM.yyyy')}">zwolnienie</p>
                     </td>
                     <!-- wypisanie w kolumnie listy wartości -->
                     <td>
                         <p th:each = "skill,iterStat : ${employee.skills}">
-                            <p th:if = "${employee.dateOfTermination==null}"> 
-                                <span th:if = "${iterStat.last==false}" 
-                                      th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</span>
-                                <span th:if = "${iterStat.last==true}"
-                                      th:text = "|${skill.name} (${skill.level})|"> Umiejętność (level)</span>
-                            </p>
-                            <p th:unless = "${employee.dateOfTermination==null}" th:class = "fired">
+                            <p> 
                                 <span th:if = "${iterStat.last==false}" 
                                       th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</span>
                                 <span th:if = "${iterStat.last==true}"
@@ -105,10 +84,7 @@
                     <!-- wypisanie uwag -->
                     <td>
                         <p th:each = "comment : ${employee.comments}">
-                            <p th:if = "${employee.dateOfTermination==null}">
-                                <span th:text = "${comment}"> Uwagi</span>
-                            </p>
-                            <p th:unless = "${employee.dateOfTermination==null}" th:class = "fired">
+                            <p>
                                 <span th:text = "${comment}"> Uwagi</span>
                             </p>
                         </p>
