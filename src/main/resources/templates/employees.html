@@ -68,16 +68,16 @@
                     <!-- wypisanie w kolumnie listy wartości -->
                     <td>
                         <p th:each = "skill,iterStat : ${employee.skills}">
-                            <span th:if = "${iterStat.last==false}" 
-                                  th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</span>
-                            <span th:if = "${iterStat.last==true}"
-                                  th:text = "|${skill.name} (${skill.level})|"> Umiejętność (level)</span>
+                            <p th:if = "${iterStat.last==false}" 
+                                  th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</p>
+                            <p th:if = "${iterStat.last==true}"
+                                  th:text = "|${skill.name} (${skill.level})|"> Umiejętność (level)</p>
                         </p>
                     </td>
-                    <!-- wypisanie uwag -->
+                    <!-- komentarze -->
                     <td>
                         <p th:each = "comment : ${employee.comments}">
-                            <span th:text = "${comment}"> Uwagi</span>
+                            <p th:text = "${comment}"> Uwagi</p>
                         </p>
                     </td>
                     <!-- zdjęcie -->
