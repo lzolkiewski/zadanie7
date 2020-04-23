@@ -69,9 +69,9 @@
                     <td>
                         <p th:each = "skill,iterStat : ${employee.skills}">
                             <p th:if = "${iterStat.last==false}" 
-                                  th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</p>
+                               th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</p>
                             <p th:if = "${iterStat.last==true}"
-                                  th:text = "|${skill.name} (${skill.level})|"> Umiejętność (level)</p>
+                               th:text = "|${skill.name} (${skill.level})|"> Umiejętność (level)</p>
                         </p>
                     </td>
                     <!-- komentarze -->
@@ -82,7 +82,7 @@
                     </td>
                     <!-- zdjęcie -->
                     <td>
-                        <img th:src="${employee.photoUrl}" class="empPhoto" src="http://via.placeholder.com/250x250"/>
+                        <img th:src="${employee.photoUrl}" class="empPhoto" src="http://via.placeholder.com/250x250" style="width: 200px;"/>
                     </td>
                 </tr>
             </table>
