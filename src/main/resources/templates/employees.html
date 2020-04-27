@@ -60,25 +60,16 @@
                     <td th:text = "${#calendars.format(employee.dateOfEmployment, 'dd.MM.yyyy')}">przyjęcie</td>
                     
                     <!-- warunek gdy jest i gdy nie ma wartości -->
-                    <td>
-                        <p th:if = "${employee.dateOfTermination==null}"> Wciąż pracuje </p>
-                        <p th:unless = "${employee.dateOfTermination==null}"
-                           th:text = "${#calendars.format(employee.dateOfTermination, 'dd.MM.yyyy')}">zwolnienie</p>
-                    </td>
+                    <td th:text = "${employee.dateOfTermination==null} ? 'Wciąż pracuje' : ${#calendars.format(employee.dateOfTermination, 'dd.MM.yyyy')}"></td>
+                    
                     <!-- wypisanie w kolumnie listy wartości -->
                     <td>
-                        <div th:each = "skill,iterStat : ${employee.skills}">
-                            <p th:if = "${iterStat.last==false}" 
-                               th:text = "|${skill.name} (${skill.level}),|"> Umiejętność (level)</p>
-                            <p th:if = "${iterStat.last==true}"
-                               th:text = "|${skill.name} (${skill.level})|"> Umiejętność (level)</p>
-                        </div>
+                        <p th:each = "skill,iterStat : ${employee.skills}" 
+                           th:text = "${iterStat.last==true} ? |${skill.name} (${skill.level})| : |${skill.name} (${skill.level}),|"></p>
                     </td>
                     <!-- komentarze -->
                     <td>
-                        <div th:each = "comment : ${employee.comments}">
-                            <p th:text = "${comment}"> Uwagi</p>
-                        </div>
+                        <p th:each = "comment : ${employee.comments}" th:text = "${comment}"></p>
                     </td>
                     <!-- zdjęcie -->
                     <td>
